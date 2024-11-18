@@ -19,3 +19,10 @@ const HandlePropsWithUseEffect = ({ count, data }) => {
 };
 
 export default HandlePropsWithUseEffect;
+
+//HTML of Handle Props With UseEffect()
+{/* <>
+<HandlePropsWithUseEffect count={count} data={data}/>
+<button onClick={()=>setCount(count+1)}>counter: {count}</button>
+<button onClick={()=>setData(data+1)}>counter: {data}</button>
+</> */}
