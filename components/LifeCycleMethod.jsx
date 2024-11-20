@@ -19,7 +19,7 @@ const LifeCycleMethod = ({ count, data }) => {
   });
   return (
     <>
-      <div>getData 1: {count}</div>
+      <div className={{}}>getData 1: {count}</div>
       <div>getData 2: {data}</div>
     </>
   );
