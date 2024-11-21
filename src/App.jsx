@@ -1,26 +1,65 @@
-import React, { useMemo, useState } from "react";
+import React from 'react'
+import Home from './components/Home';
+import About from './components/About';
+import Dashboard from './components/Dashboard';
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import Navbar from './components/Navbar';
+import Reports from "./components/Reports"
+import Courses from "./components/Courses"
+import MockTest from "./components/MockTest"
+import NotFound from './components/NotFound';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element:
+      <div>
+        <Navbar />
+        <Home />
+      </div>,
+  },
+  {
+    path: "/about",
+    element: <div>
+      <Navbar />
+      <About />
+    </div>,
+  },
+  {
+    path: "/dashboard",
+    element: <div>
+      <Navbar />
+      <Dashboard />
+    </div>,
+    children: [
+      {
+        path: 'courses',
+        element: <Courses />
+      },
+      {
+        path: 'mock-tests', 
+        element: <MockTest />
+      },
+      {
+        path: 'reports',
+        element: <Reports />
+      },
+      {
+        path: '*',
+        element: <NotFound />
+      },
+    ]
+  },
+]);
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [item, setItem] = useState(1)
-
-  const multiCountMemo = useMemo(function multicount() {
-    console.warn("multicount")
-    return count * 5;
-
-  }, [count]);
 
   return (
-    <>
-      <div className="app">
-        <h3>{count}</h3>
-        <h2>{item}</h2>
-        <h4>{multiCountMemo}</h4>
-        <button onClick={() => setCount(count + 1)}>update count: {count}</button>
-        <button onClick={() => setItem(item*5)}>update item: {item}</button>
-      </div>
-    </>
-  );
-};
+    <div>
+      <RouterProvider router={router} />
+    </div>
 
-export default App;
+  )
+}
+
+export default App

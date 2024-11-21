@@ -1,0 +1,19 @@
+ul{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul li a{
+    text-decoration: none;
+}
+
+.active-link{
+    border: 2px solid red;
+    padding: 3px;
+}
