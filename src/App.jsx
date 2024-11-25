@@ -1,54 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react'
+import ChildComponent from './components/ChildComponent';
 
 const App = () => {
-  const [joke, setJoke] = useState(null); // Start with `null` since we expect a single object.
+  const [count, setCount] = useState(0);
 
-  const fetchJoke = async () => {
-    try {
-      const response = await fetch("https://official-joke-api.appspot.com/random_joke");
-      const data = await response.json();
-      setJoke(data); // Set the response directly to `joke`.
-    } catch (error) {
-      console.error("Error fetching joke:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchJoke();
-  }, []);
+  const handleClick = useCallback(() =>{
+    setCount(count+1);
+  }, [count]);
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: 20
-    }}>
-      <table border="2">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Punchline</th>
-            <th>Setup</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          {joke ? ( // Ensure `joke` is not null before rendering.
-            <tr >
-              <td>{joke.id}</td>
-              <td>{joke.punchline}</td>
-              <td>{joke.setup}</td>
-              <td>{joke.type}</td>
-            </tr>
-          ) : (
-            <tr>
-              <td colSpan="4">Loading...</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+    <div>
+      <div>
+        <h3>increment: {count}</h3>
+        <button onClick={handleClick}>count</button>
+      </div>
 
-export default App;
+      <div>
+        <ChildComponent  buttonName="click here" handleClick={handleClick}/>
+      </div>
+    </div>
+  )
+}
+
+export default App
